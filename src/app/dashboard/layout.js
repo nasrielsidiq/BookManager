@@ -8,6 +8,10 @@ export default function DashboardLayout({ children }) {
   const handleToggleSide = () => {
     setToggleSide(!toggleSide);
   }
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/";
+  }
   return (
     <div className="flex overflow-auto h-screen border-2">
       <button onClick={() => { handleToggleSide() }} className={`$toggleSide ? "translate-x-55" : "" transition-transform duration-500 ease-in-out w-15 bg-white px-2 py-1 transform -rotate-270 origin-bottom-left whitespace-nowrap rounded-t-lg absolute border-1 border-gray-400 md:hidden`}>Menu</button>
@@ -18,7 +22,7 @@ export default function DashboardLayout({ children }) {
         <div className="pt-10 w-full flex flex-col items-center justify-center">
           <span className="font-poppins text-[20px] font-bold">Book Manager</span>
         </div>
-        <div className="mt-10 w-full flex-1">
+        <div className="mt-10 w-full h-full flex-1">
           <ul className="w-full grid gap-3 px-5 font-semibold">
               <li>
                 <Link href={"/dashboard"}>Overview</Link>
@@ -27,6 +31,9 @@ export default function DashboardLayout({ children }) {
                 <Link href={"/dashboard/create"}>Create</Link>
               </li>
           </ul>
+        </div>
+        <div className="w-full px-5 mb-5">
+          <button onClick={handleLogout} className="w-full bg-red-500 text-white py-2 rounded-lg font-semibold hover:bg-red-600 transition-colors duration-300">Logout</button>
         </div>
       </aside>
       <div className="flex-grow flex flex-col md:ml-[300px]">
